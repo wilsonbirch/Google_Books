@@ -8,10 +8,10 @@ function Nav() {
       <div className = "container">
       <Link className="navbar-brand" to="/">Google Books</Link>
       <ul className="navbar-nav ml-auto">
-          <li class="nav-item ">
+          <li className="nav-item ">
             <Link className="nav-link" to="/search">Search</Link>
           </li>
-          <li class="nav-item ">
+          <li className="nav-item ">
             <Link className="nav-link" to="/saved">Saved</Link>
           </li>
         </ul>
