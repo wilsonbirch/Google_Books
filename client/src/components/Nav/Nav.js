@@ -6,9 +6,7 @@ function Nav() {
 
     <nav className="navbar navbar-expand-lg navbar-light" >
       <div className = "container">
-      <a className="navbar-brand" href="/">
-        Google Books
-      </a>
+      <Link className="navbar-brand" to="/">Google Books</Link>
       <ul className="navbar-nav ml-auto">
           <li class="nav-item ">
             <Link className="nav-link" to="/search">Search</Link>
