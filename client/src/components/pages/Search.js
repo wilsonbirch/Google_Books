@@ -8,7 +8,7 @@ function Search () {
             <Jumbotron id ="jumbotron">
                 <h1>Google Books Search</h1>
                 <p>
-                    Search for books of interest here, find something you like? Save it and view on the saved books page.
+                    Search for books of interest here, find something you like? View, then save it and view on the saved books page.
                 </p>
             </Jumbotron>
 
