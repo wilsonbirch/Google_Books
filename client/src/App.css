@@ -56,3 +56,12 @@ body {
   height: 50px;
   padding: 13px;
 }
+
+#jumbotron {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#resultsCard{
+  margin-top: 30px;
+}
