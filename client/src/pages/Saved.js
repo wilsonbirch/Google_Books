@@ -1,6 +1,6 @@
 import React from "react";
 import { Jumbotron, Container, Card } from 'react-bootstrap'
-import BookCard from "../components/BookCard/BookCard"
+import BookCard from "../components/SavedBookCard/BookCard"
 
 function Saved ()  {
 
@@ -20,7 +20,6 @@ function Saved ()  {
                     </BookCard>
                 </Card.Body>
             </Card>
-
         </Container>
     );
 

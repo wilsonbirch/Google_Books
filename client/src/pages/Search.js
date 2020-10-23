@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Jumbotron, Container, Card, Form, Button } from 'react-bootstrap'
+import axios from 'axios';
+import SearchedBookCard from "../components/SearchedBookCard/BookCard"
 
 function Search () {
+    const [items, setItems] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [url, setUrl] = useState('https://books.googleapis.com/books/v1/volumes?q=');
+
+
+    function handleChange(event) {
+        event.preventDefault();
+        console.log("Submitted: " + searchTerm);
+    }
+
+    useEffect(() => {  
+            const fetchData = async () => {
+            const result = await axios(url);
+            setItems(result.data)
+        }
+            fetchData();
+    }, [url]);
+
+    console.log(items);
 
     return (
         <Container>
@@ -15,12 +36,12 @@ function Search () {
             <Card>
                 <Card.Header>Books Search</Card.Header>
                 <Card.Body>
-                    <Form>
-                    <Form.Group >
-                        <Form.Control type="text" placeholder="Type Book Title Here" />
+                    <Form onChange={handleChange}> 
+                    <Form.Group controlId = "booksearch">
+                        <Form.Control autoFocus type="text" placeholder="Type Book Title Here" value = {searchTerm} onChange = {e=> setSearchTerm(e.target.value)}/>
                     </Form.Group>
-                    <Button variant="light btn-sm" type="submit">
-                        Submit
+                    <Button variant="light btn-sm" type="button" onClick={() => setUrl(`https://books.googleapis.com/books/v1/volumes?q=${searchTerm}&key=AIzaSyCT4ndO_FO6f72PXHqey5q-SOSGNb7aS0U`)}>
+                        Search
                     </Button>
                     </Form>
                 </Card.Body>
@@ -29,7 +50,7 @@ function Search () {
             <Card id = "resultsCard" >
                 <Card.Header>Search Results</Card.Header>
                 <Card.Body>
-                    <Card.Text>Books will render here</Card.Text>
+                    <SearchedBookCard {...items}></SearchedBookCard>
                 </Card.Body>
             </Card>
         </Container>
