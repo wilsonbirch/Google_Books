@@ -9,14 +9,14 @@ function SearchedBookCard (props) {
     function createSearchBookCard(book) {
         return (
             <Card className="col" key = {book.id}>
-    <Card.Img variant="top" src={book.volumeInfo.imageLinks.thumbnail} style = {{ width: "100px"}}/>
-            <Card.Body>
-                <Card.Title>{book.volumeInfo.title}</Card.Title>
-                <Card.Subtitle>{book.volumeInfo.authors}</Card.Subtitle>
-                <Card.Text className = "text-truncate">{book.volumeInfo.description}</Card.Text>
-                <Card.Link href = {book.selfLink}>Read More Here</Card.Link>
-            </Card.Body>
-        </Card>
+                <Card.Img variant="top" src={ book.volumeInfo.imageLinks === undefined ? `` : `${book.volumeInfo.imageLinks.thumbnail}`} style = {{ width: "100px"}}/>
+                <Card.Body>
+                    <Card.Title>{book.volumeInfo.title}</Card.Title>
+                    <Card.Subtitle>{book.volumeInfo.authors}</Card.Subtitle>
+                    <Card.Text className = "text-truncate">{book.volumeInfo.description}</Card.Text>
+                    <Card.Link href = {book.selfLink}>Read More Here</Card.Link>
+                </Card.Body>
+            </Card>
         );
     }
 
