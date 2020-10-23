@@ -1,28 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Jumbotron, Container, Card } from 'react-bootstrap'
 import BookCard from "../components/BookCard/BookCard"
-import API from "../utils/API";
 
 function Saved ()  {
-    
-    
-    const [books, setBooks] = useState([])
-
-    // Load all books and store them with setBooks
-    useEffect(() => {
-        loadBooks()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-    }, [])
-
-    // Loads all books and sets them to books
-    function loadBooks() {
-    API.getBooks()
-      .then(res => 
-        setBooks(res.data)
-      )
-      .catch(err => console.log(err));
-    };
-
-    //console.log(books);
 
     return (
         <Container >
@@ -36,7 +16,7 @@ function Saved ()  {
             <Card id = "resultsCard">
                 <Card.Header>Saved Books</Card.Header>
                 <Card.Body>
-                    <BookCard props = {books}>
+                    <BookCard>
                     </BookCard>
                 </Card.Body>
             </Card>

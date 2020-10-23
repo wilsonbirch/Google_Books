@@ -1,40 +1,57 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, {useState, useEffect} from "react";
+import { Card, Button } from "react-bootstrap";
+import API from "../../utils/API";
+
 
 function BookCard (props) {
 
-    let bookArray = props;
+    const [books, setBooks] = useState([])
     let renderedBookArray;
+
+    // Load all books and store them with setBooks
+    useEffect(() => {
+        loadBooks()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    }, [])
+
+    // Loads all books and sets them to books
+    function loadBooks() {
+    API.getBooks()
+      .then(res => 
+        setBooks(res.data)
+      )
+      .catch(err => console.log(err));
+    };
+
+    // Deletes a book from the database with a given id, then reloads books from the db
+    function deleteBook(id) {
+        API.deleteBook(id)
+        .then(res => loadBooks())
+        .catch(err => console.log(err));
+    }
 
     function createBookCard(book) {
         return (
-            <Card className="col">
+            <Card className="col" key = {book._id}>
             <Card.Img variant="top" src={book.image} style = {{ width: "100px"}}/>
             <Card.Body>
                 <Card.Title>{book.title}</Card.Title>
                 <Card.Subtitle>{book.author}</Card.Subtitle>
                 <Card.Text className = "text-truncate">{book.description}</Card.Text>
                 <Card.Link href={book.link}>Read More Here</Card.Link>
+                <Button variant="primary" listid = {book._id} onClick={() => deleteBook(book._id)}>Delete</Button>
             </Card.Body>
         </Card>
         );
     }
 
-    if(bookArray.props[0]) {
-        
-        renderedBookArray = bookArray.props.map(createBookCard)
+    if(books) {
+        renderedBookArray = books.map(createBookCard)
         return renderedBookArray;
     }else{
         return (
             <p>no books saved!</p>
         );
     }
-
-
-
-
-
-
 }
 
 export default BookCard;
