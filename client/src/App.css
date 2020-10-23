@@ -65,3 +65,7 @@ body {
 #resultsCard{
   margin-top: 30px;
 }
+
+#bookDescription {
+  max-lines: 2;
+}

@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer"
-import Home from "./components/pages/Home";
-import Saved from "./components/pages/Saved";
-import Search from "./components/pages/Search";
+import Home from "./pages/Home";
+import Saved from "./pages/Saved";
+import Search from "./pages/Search";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
