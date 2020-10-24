@@ -26,7 +26,7 @@ function Search () {
     //console.log(items);
 
     return (
-        <Container>
+        <Container className ="main">
             <Jumbotron id ="jumbotron">
                 <h1>Google Books Search</h1>
                 <p>

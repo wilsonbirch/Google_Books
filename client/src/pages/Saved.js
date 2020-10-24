@@ -5,7 +5,7 @@ import BookCard from "../components/SavedBookCard/BookCard"
 function Saved ()  {
 
     return (
-        <Container >
+        <Container className ="main">
             <Jumbotron id ="jumbotron">
                 <h1>Google Books Saved</h1>
                 <p>
