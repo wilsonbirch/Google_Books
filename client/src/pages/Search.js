@@ -3,15 +3,16 @@ import { Jumbotron, Container, Card, Form, Button } from 'react-bootstrap'
 import axios from 'axios';
 import SearchedBookCard from "../components/SearchedBookCard/BookCard"
 
+
+
 function Search () {
     const [items, setItems] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [url, setUrl] = useState('https://books.googleapis.com/books/v1/volumes?q=');
-
+    const [url, setUrl] = useState(`https://books.googleapis.com/books/v1/volumes?q=`);
 
     function handleChange(event) {
         event.preventDefault();
-        console.log("Submitted: " + searchTerm);
+        //console.log("Submitted: " + searchTerm);
     }
 
     useEffect(() => {  
@@ -22,7 +23,7 @@ function Search () {
             fetchData();
     }, [url]);
 
-    console.log(items);
+    //console.log(items);
 
     return (
         <Container>
