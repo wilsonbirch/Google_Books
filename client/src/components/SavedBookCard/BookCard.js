@@ -31,8 +31,6 @@ function BookCard (props) {
 
     function createBookCard(book) {
 
-        console.log(book);
-
         return (
             <Card className="col" key = {book._id}>
             <Card.Img variant="top" src={book.image} style = {{ width: "100px"}}/>
