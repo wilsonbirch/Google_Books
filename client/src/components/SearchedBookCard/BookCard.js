@@ -43,10 +43,10 @@ function SearchedBookCard (props) {
                 <Card.Img variant="top" src={ book.volumeInfo.imageLinks === undefined ? `` : `${book.volumeInfo.imageLinks.thumbnail}`} style = {{ width: "100px"}}/>
                 <Card.Body>
                     <Card.Title>{book.volumeInfo.title}</Card.Title>
-                    <Card.Subtitle>{book.volumeInfo.authors}</Card.Subtitle>
+                    <Card.Subtitle>{book.volumeInfo.authors[1] ? book.volumeInfo.authors[1] + ", " + book.volumeInfo.authors[0] : book.volumeInfo.authors[0]} </Card.Subtitle>
                     <Card.Text className = "text-truncate">{book.volumeInfo.description}</Card.Text>
                     <Card.Link href = {book.selfLink}>Read More Here</Card.Link>
-                    <Button variant="primary" id = {book.id} onClick={(event) => {
+                    <Button variant="primary" className="btn-sm saveBtn" id = {book.id} onClick={(event) => {
                         handleBookSave(book.id);
                         handleEvent(event);
                     }}>Save</Button>
