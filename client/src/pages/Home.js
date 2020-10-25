@@ -4,7 +4,7 @@ import logo from '../assets/logo.svg';
 function Home () {
 
     return (
-        <div className ="container">
+        <div className ="container main">
             <div className = "row">
                 <div className= "col welcomeColumn">
                 <h5 id="welcomeHeader">Welcome to Google Books Search! The name speaks for itself..</h5>

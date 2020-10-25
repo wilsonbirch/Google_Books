@@ -31,6 +31,10 @@ body {
    height:100%;
 }
 
+.main {
+  padding-bottom: 100px;
+}
+
 .navbar {
   background-color: #e3f2fd !important;
 }
