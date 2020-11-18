@@ -73,3 +73,7 @@ body {
 #bookDescription {
   max-lines: 2;
 }
+
+.saveBtn, .deleteBtn {
+  margin-left:20px;
+}

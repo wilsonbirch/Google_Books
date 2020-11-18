@@ -8,7 +8,7 @@ import SearchedBookCard from "../components/SearchedBookCard/BookCard"
 function Search () {
     const [items, setItems] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [url, setUrl] = useState(`https://books.googleapis.com/books/v1/volumes?q=`);
+    const [url, setUrl] = useState(``);
 
     function handleChange(event) {
         event.preventDefault();

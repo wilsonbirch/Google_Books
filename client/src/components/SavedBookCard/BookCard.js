@@ -30,15 +30,16 @@ function BookCard (props) {
     }
 
     function createBookCard(book) {
+
         return (
             <Card className="col" key = {book._id}>
             <Card.Img variant="top" src={book.image} style = {{ width: "100px"}}/>
             <Card.Body>
                 <Card.Title>{book.title}</Card.Title>
-                <Card.Subtitle>{book.author}</Card.Subtitle>
+                <Card.Subtitle>{book.author[1] ? book.author[1] + ", " + book.author[0] : book.author[0]}</Card.Subtitle>
                 <Card.Text className = "text-truncate">{book.description}</Card.Text>
-                <Card.Link href={book.link}>Read More Here</Card.Link>
-                <Button variant="primary" listid = {book._id} onClick={() => deleteBook(book._id)}>Delete</Button>
+                <Card.Link href={book.link} target = "_blank" >Read More Here</Card.Link>
+                <Button variant="primary" className= "btn-sm deleteBtn" listid = {book._id} onClick={() => deleteBook(book._id)}>Delete</Button>
             </Card.Body>
         </Card>
         );
