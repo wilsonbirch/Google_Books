@@ -2,14 +2,13 @@
 
 An app that uses the google books API to search by name, any searched books can then be saved to the database and reviewed later.
 
-
 ## Motivation
 
 React-based Google Books Search app. This App utilizes React lifecycle methods to query and display books based on user searches. Node, Express and MongoDB allows users to save books for review or purchase later.
 
 ## Website
 
-Hosted on heroku: https://intense-lowlands-28384.herokuapp.com/
+Hosted on [fly.io](https://google-books-wb.fly.dev/)
 
 ## Getting Started
 
