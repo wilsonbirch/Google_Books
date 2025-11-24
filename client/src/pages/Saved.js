@@ -1,28 +1,27 @@
-import React from "react";
+import React from 'react'
 import { Jumbotron, Container, Card } from 'react-bootstrap'
-import BookCard from "../components/SavedBookCard/BookCard"
+import BookCard from '../components/SavedBookCard/BookCard'
 
-function Saved ()  {
-
+function Saved() {
     return (
-        <Container className ="main">
-            <Jumbotron id ="jumbotron">
+        <Container className="main">
+            <Jumbotron id="jumbotron">
                 <h1>Google Books Saved</h1>
                 <p>
-                    All saved books will be shown here, you have the option to view or delete them.
+                    All saved books will be shown here, you have the option to
+                    view or delete them.
                 </p>
             </Jumbotron>
 
-            <Card id = "resultsCard">
+            <Card id="resultsCard">
                 <Card.Header>Saved Books</Card.Header>
                 <Card.Body>
-                    <BookCard>
-                    </BookCard>
+                    <BookCard></BookCard>
                 </Card.Body>
             </Card>
         </Container>
-    );
-
+    )
 }
 
-export default Saved;
+export default Saved
+

@@ -1,70 +1,55 @@
-import React from "react";
-import { Card, Button } from "react-bootstrap";
-import API from "../../utils/API";
+import React from 'react'
+import { Card, Button } from 'react-bootstrap'
+import API from '../../utils/API'
 
-function SearchedBookCard (props) {
-
-    //const [searchedBookObject, setSearchedBookObject] = useState({})
-
-    let searchedBookArray = [];
-    searchedBookArray = props.items;
-
-    function handleEvent(e) {
-        e.preventDefault();
-    }
-    function handleBookSave(id) {
-
-        let savedIdArray = [
-            {
-                savedId: id
-            }
-        ]
-        
-        let newSavedBookArray = searchedBookArray.filter(o1 => savedIdArray.some(o2 => o1.id === o2.savedId));
-
+function SearchedBookCard({ book }) {
+    const handleBookSave = () => {
         API.saveBook({
-            title: newSavedBookArray[0].volumeInfo.title,
-            author: newSavedBookArray[0].volumeInfo.authors,
-            description: newSavedBookArray[0].volumeInfo.description,
-            image: newSavedBookArray[0].volumeInfo.imageLinks.thumbnail,
-            link: newSavedBookArray[0].volumeInfo.previewLink
-          })
-            .then(res => {
-                console.log(res); 
-                alert(`New book ${newSavedBookArray[0].volumeInfo.title} has been saved!`)
+            title: book.volumeInfo.title,
+            author: book.volumeInfo.authors,
+            description: book.volumeInfo.description,
+            image: book.volumeInfo.imageLinks
+                ? book.volumeInfo.imageLinks.thumbnail
+                : '',
+            link: book.volumeInfo.previewLink,
+        })
+            .then((res) => {
+                console.log(res)
+                alert(`Book ${book.volumeInfo.title} saved!`)
             })
-            .catch(err => console.log(err));
-        }
-
-    function createSearchBookCard(book) {
-        
-        return (
-            <Card className="col" key = {book.id}>
-                <Card.Img variant="top" src={ book.volumeInfo.imageLinks === undefined ? `` : `${book.volumeInfo.imageLinks.thumbnail}`} style = {{ width: "100px"}}/>
-                <Card.Body>
-                    <Card.Title>{book.volumeInfo.title}</Card.Title>
-                    <Card.Subtitle>{book.volumeInfo.authors[1] ? book.volumeInfo.authors[1] + ", " + book.volumeInfo.authors[0] : book.volumeInfo.authors[0]} </Card.Subtitle>
-                    <Card.Text className = "text-truncate">{book.volumeInfo.description}</Card.Text>
-                    <Card.Link href = {book.volumeInfo.previewLink} target = "_blank">Read More Here</Card.Link>
-                    <Button variant="primary" className="btn-sm saveBtn" id = {book.id} onClick={(event) => {
-                        handleBookSave(book.id);
-                        handleEvent(event);
-                    }}>Save</Button>
-                </Card.Body>
-            </Card>
-        );
+            .catch((err) => console.log(err))
     }
 
-    if(searchedBookArray) {
-        let renderedsearchedBookArray = searchedBookArray.map(createSearchBookCard)
-        return renderedsearchedBookArray;
-    }else{
-        return (
-            <p>Search for some books!</p>
-        );
-    }
-
-
+    return (
+        <Card className="col">
+            <Card.Img
+                variant="top"
+                src={
+                    book.volumeInfo.imageLinks
+                        ? book.volumeInfo.imageLinks.thumbnail
+                        : ''
+                }
+                style={{ width: '100px' }}
+            />
+            <Card.Body>
+                <Card.Title>{book.volumeInfo.title}</Card.Title>
+                <Card.Subtitle>
+                    {book.volumeInfo.authors
+                        ? book.volumeInfo.authors[0]
+                        : 'Unknown Author'}
+                </Card.Subtitle>
+                <Card.Text className="text-truncate">
+                    {book.volumeInfo.description}
+                </Card.Text>
+                <Card.Link href={book.volumeInfo.previewLink} target="_blank">
+                    Read More
+                </Card.Link>
+                <Button variant="primary" onClick={handleBookSave}>
+                    Save
+                </Button>
+            </Card.Body>
+        </Card>
+    )
 }
 
-export default SearchedBookCard;
+export default SearchedBookCard

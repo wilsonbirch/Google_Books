@@ -7,11 +7,6 @@ function Search() {
     const [items, setItems] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
 
-    function handleChange(event) {
-        event.preventDefault()
-        //console.log("Submitted: " + searchTerm);
-    }
-
     const handleSearch = async () => {
         if (!searchTerm.trim()) return // Don't search empty strings
 
@@ -37,7 +32,7 @@ function Search() {
             <Card>
                 <Card.Header>Books Search</Card.Header>
                 <Card.Body>
-                    <Form onChange={handleChange}>
+                    <Form>
                         <Form.Group controlId="booksearch">
                             <Form.Control
                                 autoFocus
@@ -61,7 +56,13 @@ function Search() {
             <Card id="resultsCard">
                 <Card.Header>Search Results</Card.Header>
                 <Card.Body>
-                    <SearchedBookCard {...items}></SearchedBookCard>
+                    {items.length > 0 ? (
+                        items.map((item) => (
+                            <SearchedBookCard key={item.id} book={item} />
+                        ))
+                    ) : (
+                        <p>No results to display</p>
+                    )}
                 </Card.Body>
             </Card>
         </Container>
