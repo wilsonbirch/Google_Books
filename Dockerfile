@@ -11,24 +11,19 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y python3 make g++ && \
     rm -rf /var/lib/apt/lists/*
 
-# Install and build client
+# Install and build client - use npm install instead of npm ci
 COPY client/package*.json ./client/
-RUN cd client && npm ci
+RUN cd client && npm install --only=production
 
 COPY client/ ./client/
 RUN cd client && npm run build
 
 # Production stage
 FROM base
-# Copy root package files (for Express server)
 COPY package*.json ./
-# Skip the "install" script that tries to install client deps
 RUN npm ci --only=production --ignore-scripts
 
-# Copy server code
 COPY . .
-
-# Copy built React app from build stage
 COPY --from=build /app/client/build ./client/build
 
 EXPOSE 3001
