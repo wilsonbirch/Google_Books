@@ -1,43 +1,35 @@
 # syntax = docker/dockerfile:1
-
 ARG NODE_VERSION=18.18.0
 FROM node:${NODE_VERSION}-slim AS base
 
-LABEL fly_launch_runtime="Node.js"
-
-# Node.js app lives here
 WORKDIR /app
-
-# Set production environment
 ENV NODE_ENV="production"
 
-# Throw-away build stage to reduce size of final image
+# Build stage for React app
 FROM base AS build
-
-# Install packages needed for node modules
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y python3 make g++ && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy client package files
-COPY client/package-lock.json client/package.json ./
-RUN npm ci --include=dev
+# Install and build client
+COPY client/package*.json ./client/
+RUN cd client && npm ci
 
-# Copy client application code
-COPY client/ .
+COPY client/ ./client/
+RUN cd client && npm run build
 
-# Build application
-RUN npm run build
-
-# Final stage for app image
+# Production stage
 FROM base
+# Copy root package files (for Express server)
+COPY package*.json ./
+# Skip the "install" script that tries to install client deps
+RUN npm ci --only=production --ignore-scripts
 
-# Install serve to run the built app
-RUN npm install -g serve
+# Copy server code
+COPY . .
 
-# Copy built application
-COPY --from=build /app/build /app/build
+# Copy built React app from build stage
+COPY --from=build /app/client/build ./client/build
 
-# Start the server
-EXPOSE 3000
-CMD ["serve", "-s", "build", "-l", "3000"]
+EXPOSE 3001
+CMD ["npm", "start"]
